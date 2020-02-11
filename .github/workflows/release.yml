@@ -19,16 +19,11 @@ jobs:
           previous=$(node -p 'require("./package").version')
           git checkout $GITHUB_REF
           if [[ "$current" != "$previous" ]]; then
-            echo "::set-output name=new-version::true"
-          else
-            echo "::set-output name=new-version::false"
+            echo "::set-output name=new-version::$current"
           fi
-      - run: |
-          echo "Output? ${{ steps.check-version.outputs.new-version }}"
       - if: steps.check-version.outputs.new-version
         run: |
-          echo new-version was truthy
-      - if: '!steps.check-version.outputs.new-version'
-        run: |
-          echo new-version was falsey
-
+          echo "Hey look a new version! ${{ steps.check-version.outputs.new-version }}"
+      - run: |
+          node --version
+          ruby --version
