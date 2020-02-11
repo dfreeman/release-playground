@@ -2,7 +2,11 @@ template: |
   ## What's Changed
 
   $CHANGES
+
 categories:
+  - title: '💥 Breaking'
+    labels:
+      - breaking
   - title: '✨ Features'
     labels:
       - enhancement
