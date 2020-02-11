@@ -18,6 +18,7 @@ const Octokit = require('@octokit/rest');
       repo,
       release_id: release.id,
       tag_name: tag,
+      name: tag,
       draft: false,
     });
   } else {

@@ -2,3 +2,13 @@ template: |
   ## What's Changed
 
   $CHANGES
+categories:
+  - title: '✨ Features'
+    labels:
+      - enhancement
+  - title: '🐛 Bugfixes'
+    labels:
+      - bug
+  - title: '🧹 Housekeeping'
+    labels:
+      - housekeeping
