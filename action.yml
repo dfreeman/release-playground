@@ -1,0 +1,5 @@
+name: 'Release Playground'
+description: '¯\\_(ツ)_/¯'
+runs:
+  using: node12
+  main: release.js
