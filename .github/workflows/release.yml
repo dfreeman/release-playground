@@ -2,44 +2,18 @@ name: Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-      - id: check-version
-        name: Check for Version Change
-        run: |
-          current=$(node -p 'require("./package").version')
-          git checkout HEAD~1
-          previous=$(node -p 'require("./package").version')
-          git checkout $GITHUB_REF
-          if [[ "$current" != "$previous" ]]; then
-            echo "::set-output name=new-version::$current"
-          fi
-      - name: Update Draft Release Notes
-        uses: release-drafter/release-drafter@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - if: steps.check-version.outputs.new-version
-        name: Tag New Version
-        run: |
-          git tag v${{ steps.check-version.outputs.new-version }}
-          git push --tags
-      - if: steps.check-version.outputs.new-version
-        name: Publish New Version
+      - name: Publish New Version
         run: |
           echo "(Pretend this is where we'd run `yarn publish` or whatever)"
-      - if: steps.check-version.outputs.new-version
-        name: Publish Release Notes
-        run: |
-          node release
+      - name: Publish Release Notes
+        uses: dfreeman/release-drafter@allow-publish
         env:
-          RELEASE_TAG: v${{ steps.check-version.outputs.new-version }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
