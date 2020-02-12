@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  tag:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
 
       - if: steps.check-version.outputs.tag
         name: Publish Release Notes
-        uses: dfreeman/release-drafter@allow-publish
+        uses: dfreeman/release-drafter@cfc4e3f
         with:
           publish: true
           name: ${{ steps.check-version.outputs.tag }}
