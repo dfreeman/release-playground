@@ -3,6 +3,8 @@ template: |
 
   $CHANGES
 
+name-template: Unreleased
+
 categories:
   - title: '💥 Breaking'
     labels:
