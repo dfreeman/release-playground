@@ -6,14 +6,19 @@ on:
       - '*'
 
 jobs:
-  release:
+  publish-package:
+    name: Publish New Package Version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Publish New Version
-        run: |
+      - run: |
           echo "(Pretend this is where we'd run `yarn publish` or whatever)"
-      - name: Publish Release Notes
-        uses: dfreeman/release-drafter@allow-publish
+  publish-release-notes:
+    name: Publish Release Notes
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dfreeman/release-drafter@allow-publish
+        with:
+          publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
