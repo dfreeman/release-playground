@@ -5,14 +5,10 @@ template: |
 
 categories:
   - title: '💥 Breaking'
-    labels:
-      - breaking
+    label: breaking
   - title: '✨ Features'
-    labels:
-      - enhancement
+    label: enhancement
   - title: '🐛 Bugfixes'
-    labels:
-      - bug
+    label: bug
   - title: '🧹 Housekeeping'
-    labels:
-      - housekeeping
+    label: housekeeping

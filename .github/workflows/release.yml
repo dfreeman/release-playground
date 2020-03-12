@@ -7,36 +7,29 @@ on:
 
 jobs:
   release:
+    name: Check and Release New Version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        name: Checkout Code
         with:
           fetch-depth: 2
 
       - id: check-version
         name: Check for Version Change
-        run: |
-          current=$(node -p 'require("./package").version')
-          git checkout HEAD~1
-          previous=$(node -p 'require("./package").version')
-          git checkout $GITHUB_REF
-          if [[ "$current" != "$previous" ]]; then
-            git tag v$current
-            git push --tags
-            echo "::set-output name=tag::v$current"
-          fi
+        uses: dfreeman/action-detect-and-tag-new-version@v1
 
       - if: steps.check-version.outputs.tag
         name: Publish New Package Version
         run: |
-          echo "(Pretend this is where we'd run `yarn publish` or whatever)"
+          # This is where we'd `yarn publish`
 
       - if: steps.check-version.outputs.tag
         name: Publish Release Notes
-        uses: dfreeman/release-drafter@cfc4e3f
+        # We can switch to a tagged version once 5.8 is published
+        uses: release-drafter/release-drafter@f677696
         with:
           publish: true
-          name: ${{ steps.check-version.outputs.tag }}
-          tag: ${{ steps.check-version.outputs.tag }}
+          version: ${{ steps.check-version.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
