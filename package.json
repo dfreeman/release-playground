@@ -1,6 +1,6 @@
 {
   "name": "release-playground",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "main": "index.js",
   "repository": "git@github.com:dfreeman/release-playground.git",
   "author": "Dan Freeman <dfreeman@salsify.com>",
