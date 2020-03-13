@@ -30,7 +30,6 @@ jobs:
         uses: release-drafter/release-drafter@f677696
         with:
           publish: true
-          name: ${{ steps.check-version.outputs.tag }}
           tag: ${{ steps.check-version.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
