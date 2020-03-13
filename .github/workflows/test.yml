@@ -1,0 +1,22 @@
+name: Test Some Things
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  release:
+    name: Let's play with operators
+    runs-on: ubuntu-latest
+    steps:
+      - id: noisy
+        run: |
+          echo '::set-output name=foo::ok'
+
+      - name: Publish New Package Version
+        run: |
+          echo "foo: ${{ steps.noisy.outputs.foo }}"
+          echo "foo == '': ${{ steps.noisy.outputs.foo == '' }}"
+          echo "bar: ${{ steps.noisy.outputs.bar }}"
+          echo "bar == '': ${{ steps.noisy.outputs.bar == '' }}"
